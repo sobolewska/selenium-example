@@ -1,0 +1,77 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.company.selenium.example</groupId>
+  <artifactId>selenium-example</artifactId>
+  <packaging>jar</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <name>selenium-example</name>
+  <url>http://maven.apache.org</url>
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
+    </dependency>
+	<dependency>
+	  <groupId>org.seleniumhq.selenium</groupId>
+	  <artifactId>selenium-java</artifactId>
+	  <version>2.33.0</version>
+	  <scope>test</scope>
+	</dependency>
+  </dependencies>
+  <build>
+	  <plugins>
+		<plugin>
+		  <groupId>org.apache.maven.plugins</groupId>
+		  <artifactId>maven-compiler-plugin</artifactId>
+		  <version>3.1</version>
+		  <configuration>
+			<source>1.7</source>
+			<target>1.7</target>
+		  </configuration>
+		</plugin>
+		<plugin>
+		  <groupId>org.apache.maven.plugins</groupId>
+		  <artifactId>maven-surefire-plugin</artifactId>
+		  <version>2.14.1</version>
+		  <configuration>
+			<testFailureIgnore>true</testFailureIgnore>
+		  </configuration>
+		</plugin>
+		<plugin>
+		  <groupId>org.apache.maven.plugins</groupId>
+		  <artifactId>maven-antrun-plugin</artifactId>
+		  <version>1.7</version>
+		  <executions>
+			<execution>
+			  <id>test-reports</id>
+			  <phase>test</phase>
+			  <configuration>
+				<tasks>
+				  <mkdir dir="target/surefire-reports"/>
+				  <junitreport todir="target/surefire-reports">
+					<fileset dir="target/surefire-reports">
+					  <include name="**/*.xml"/>
+					</fileset>
+					<report styledir="resources/reportstyle" format="frames" todir="target/surefire-reports"/>
+				  </junitreport>
+				</tasks>
+			  </configuration>
+			  <goals>
+				<goal>run</goal>
+			  </goals>
+			</execution>
+		  </executions>
+		  <dependencies>
+			<dependency>
+			  <groupId>org.apache.ant</groupId>
+			  <artifactId>ant-junit</artifactId>
+			  <version>1.9.0</version>
+			</dependency>
+		  </dependencies>
+		</plugin>
+	  </plugins>
+	</build>
+</project>
